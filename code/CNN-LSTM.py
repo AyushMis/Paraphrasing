@@ -38,12 +38,49 @@ MODEL_SAVING_DIR = '../models/'
 # In[ ]:
 
 
-# Load training and test set
-train_df = pd.read_csv(TRAIN_CSV, sep="\t", error_bad_lines=False)
-test_df = pd.read_csv(TEST_CSV, sep="\t", error_bad_lines=False)
+file1 = open(TRAIN_CSV,"r")
+data = []
+for line in file1:
+    fields = line.split("\t")
+    data.append(fields)
+a = []
+b = []
+c = []
+d = []
+e = []
+for element in data:
+    a.append(element[0])
+    b.append(element[1])
+    c.append(element[2])
+    d.append(element[3])
+    e.append(element[4])
+print(type(a[0]))
+d = {'Quality': a[1:], 'sentence1': d[1:], 'sentence2': e[1:]}
+train_df = pd.DataFrame(data=d)
 
-train_df = train_df.rename(columns={'#1 String': 'sentence1', '#2 String': 'sentence2'})
-test_df = test_df.rename(columns={'#1 String': 'sentence1', '#2 String': 'sentence2'})
+file2 = open(TEST_CSV,"r")
+data = []
+for line in file2:
+    fields = line.split("\t")
+    data.append(fields)
+a = []
+b = []
+c = []
+d = []
+e = []
+for element in data:
+    a.append(element[0])
+    b.append(element[1])
+    c.append(element[2])
+    d.append(element[3])
+    e.append(element[4])
+print(type(a[0]))
+d = {'Quality': a[1:], 'sentence1': d[1:], 'sentence2': e[1:]}
+test_df = pd.DataFrame(data=d)
+
+
+# In[ ]:
+
 
 stops = set(stopwords.words('english'))
 
@@ -299,4 +336,3 @@ plt.xlabel('Epoch')
 plt.legend(['Train', 'Validation'], loc='upper right')
 #plt.show()
 plt.savefig('EpochVsLoss')
-
